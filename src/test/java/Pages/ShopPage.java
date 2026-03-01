@@ -1,13 +1,17 @@
 package Pages;
 
+import java.time.Duration;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class ShopPage {
 
@@ -58,8 +62,24 @@ public class ShopPage {
 		return text.replaceAll("[^0-9]", ""); // Returns only "1"
 	}
 
+//	public void clickPrimaryCheckout() {
+//		primaryCheckoutBtn.click();
+//	}
 	public void clickPrimaryCheckout() {
-		primaryCheckoutBtn.click();
+	    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+	    try {
+	        // Wait for the button to be clickable
+	        WebElement checkoutBtn = wait.until(ExpectedConditions.elementToBeClickable(primaryCheckoutBtn));
+	        
+	        // Scroll it into view just in case it's at the very edge of the screen
+	        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", checkoutBtn);
+	        
+	        checkoutBtn.click();
+	    } catch (Exception e) {
+	        // If standard click fails or times out, force it with JavaScript
+	        System.out.println("Standard click failed, attempting JS click on Checkout button");
+	        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", primaryCheckoutBtn);
+	    }
 	}
 
 	public void clickFinalCheckout() {

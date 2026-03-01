@@ -38,10 +38,10 @@ jobs:
       
       # 5. Upload Artifacts
       - name: Upload Cucumber Test Reports
-        if: always() # Ensures report is uploaded even if tests fail
+        if: always() 
         uses: actions/upload-artifact@v4
         with:
           name: cucumber-test-reports
-          path: target/visual-report/ # cucumber reports like uhg with plugin added in pom.xml
+          path: target/cucumber-html-reports/
           retention-days: 5
       

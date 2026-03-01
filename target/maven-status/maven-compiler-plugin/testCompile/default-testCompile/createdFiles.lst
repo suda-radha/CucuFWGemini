@@ -1,4 +1,0 @@
-Pages\LoginPage.class
-Runner\TestRunner.class
-StepDefinitions\Hooks.class
-StepDefinitions\LoginSteps.class

@@ -11,7 +11,6 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.TakesScreenshot;
 
 import java.io.File;
-
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 
@@ -62,12 +61,6 @@ public class Hooks {
 		}
 	}
 
-//	@After
-//	public void teardown() {
-//
-//			if (driver != null) {
-//			driver.quit();
-//		}
-//	}
+	
 
 }

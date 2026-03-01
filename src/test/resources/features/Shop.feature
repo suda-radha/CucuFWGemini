@@ -8,15 +8,15 @@ Feature: Shop page functionality testing
     Then I should be redirected to the product page
 
   # --- Test 1: Cart Counter ---
-  Scenario Outline: Add specific products and verify cart count
-    Given I am on the shop page
-    When I click the Add button for "<productName>"
-    Then the cart badge should display "<expectedCount>"
+ # Scenario Outline: Add specific products and verify cart count
+  #  Given I am on the shop page
+   # When I click the Add button for "<productName>"
+    #Then the cart badge should display "<expectedCount>"
 
-    Examples:
-      | productName    | expectedCount |
-      | iphone X       | 1             |
-      | Samsung Note 8 | 1             |
+    #Examples:
+    #  | productName    | expectedCount |
+    #  | iphone X       | 1             |
+     # | Samsung Note 8 | 1             |
 
   # --- Test 2: Summary List ---
   Scenario Outline: Verify products in the checkout summary

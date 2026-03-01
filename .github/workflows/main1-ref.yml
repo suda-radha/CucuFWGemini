@@ -1,0 +1,52 @@
+name: Selenium Regression Suite- for reference - working good file
+
+# Run the pipeline on every push to teh main branch
+on:
+  #push:
+   # branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      #1. pull the code from github to runner
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      #2. Setup Java environment (JDK21)
+      - name: Setup JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+          cache: maven
+
+      #3. Setup Chrome
+      # GitHub Hosted Runners already have Chrome installed.
+      # This step just verifies the version to ensure it's ready.
+      - name: Check Browser Version
+        run: google-chrome --version
+
+      #4. Run Cucumber Tests
+      - name: Run Cucumber Tests
+        #run: mvn clean test -Dtest=Runner.TestRunner -Dbrowser=headless -PRegression
+        run: mvn clean verify -Dtest=Runner.TestRunner -Dbrowser=headless -PRegression
+
+      
+      # 5. Upload Artifacts
+      - name: Upload Cucumber Test Reports
+        if: always() # Ensures report is uploaded even if tests fail
+        uses: actions/upload-artifact@v4
+        with:
+          name: cucumber-test-reports
+          path: |
+            target/cucumber-html-reports/ # cucumber reports like uhg with plugin added in pom.xml
+            #target/cucumber-reports.html
+            #target/cucumber-reports.json
+            #target/cucumber-reports.xml
+            #target/surefire-reports/
+          retention-days: 5
+      

@@ -1,0 +1,63 @@
+name: Manual Run - Selenium Cucumber Suite
+
+# Run the pipeline on every push to teh main branch
+on:
+  # Runs automatically on every push to main
+  push:
+    branches: [ main ]
+  
+  # Allows manual trigger from the Actions tab
+  workflow_dispatch:
+    inputs:
+      profile:
+        description: 'Select Maven Profile to run'
+        required: true
+        default: 'Smoke'
+        type: choice
+        options:
+          - Focus
+          - Smoke
+          - Regression
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      #1. pull the code from github to runner
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      #2. Setup Java environment (JDK21)
+      - name: Setup JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+          cache: maven
+
+      #3. Setup Chrome
+      # GitHub Hosted Runners already have Chrome installed.
+      # This step just verifies the version to ensure it's ready.
+      - name: Check Browser Version
+        run: google-chrome --version
+
+      #4. Run Cucumber Tests
+     # Use the input from the manual trigger, or default to 'Smoke' if it's a push event
+      - name: Run Cucumber Tests
+        run: |
+          PROFILE=${{ github.event.inputs.profile || 'Smoke' }}
+          mvn clean test -Dtest=Runner.TestRunner -Dbrowser=headless -P$PROFILE
+      
+      # 5. Upload Artifacts
+      - name: Upload Cucumber Test Reports
+        if: always() # Ensures report is uploaded even if tests fail
+        uses: actions/upload-artifact@v4
+        with:
+          name: cucumber-test-reports
+          path: |
+            target/cucumber-reports.html
+            target/cucumber-reports.json
+            target/cucumber-reports.xml
+            target/surefire-reports/
+          retention-days: 5
+      

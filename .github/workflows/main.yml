@@ -1,0 +1,47 @@
+name: Selenium Regression Suite
+
+# Run the pipeline on every push to teh main branch
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      #1. pull the code from github to runner
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      #2. Setup Java environment (JDK21)
+      - name: Setup JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'termurin'
+          cache: maven
+
+      #3. Setup Chrome
+      - name: Setup Browser
+        run: 
+          sudo apt-get update
+          sudo apt-get install -y google-chrome-stable
+
+      #4. Run Tests using maven
+          # We use -Dbrowser=headless because Cloud runners don't have a UI/Display
+      - name: Run Selenium Tests
+        run: mvn clean test -Dbrowser=headless
+
+      
+      # 5. Upload Artifacts
+      - name: Upload Test Report
+        if: always() # Ensures report is uploaded even if tests fail
+        uses: actions/upload-artifact@v4
+        with:
+          name: selenium-test-report
+          path: target/surefire-reports/ 
+          retention-days: 5
+      

@@ -32,7 +32,7 @@ jobs:
 
       #4. Run Cucumber Tests
       - name: Run Cucumber Tests
-        run: mvn clean test -Dtest=Runner.TestRunner -Dbrowser=headless
+        run: mvn clean test -Dtest=Runner.TestRunner -Dbrowser=headless -PRegression
 
       
       # 5. Upload Artifacts

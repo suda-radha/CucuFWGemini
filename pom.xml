@@ -43,17 +43,44 @@
 			<version>5.7.0</version>
 		</dependency>
 	</dependencies>
+
+	<!-- Profiles to add Cucucmber Tags-->
 	<build>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
-				<version>3.1.2</version>
+				<version>3.0.0-M5</version>
 				<configuration>
-					<testFailureIgnore>true</testFailureIgnore>
+					<systemPropertyVariables>
+						<cucumber.filter.tags>${cucumber.filter.tags}</cucumber.filter.tags>
+					</systemPropertyVariables>
 				</configuration>
 			</plugin>
 		</plugins>
 	</build>
+
+	<profiles>
+		<profile>
+			<id>Focus</id>
+			<properties>
+				<cucumber.filter.tags>@focus</cucumber.filter.tags>
+			</properties>
+		</profile>
+
+		<profile>
+			<id>Smoke</id>
+			<properties>
+				<cucumber.filter.tags>@smoke</cucumber.filter.tags>
+			</properties>
+		</profile>
+
+		<profile>
+			<id>Regression</id>
+			<properties>
+				<cucumber.filter.tags>not @ignore and not @wip</cucumber.filter.tags>
+			</properties>
+		</profile>
+	</profiles>
 
 </project>

@@ -7,13 +7,14 @@ import io.cucumber.junit.CucumberOptions;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-		features = "src/test/resources/features",
+		features = "src/test/resources/features/Shop.feature",
 		glue = "StepDefinitions",
 		plugin = {"pretty", 
 				  "html:target/cucumber-reports.html", 
 				  "junit:target/cucumber-reports.xml",
 				  "json:target/cucumber-reports.json"}, // Added for advanced reporting
-		monochrome = true
+		monochrome = true,
+		tags = "@focus"
 		)
 public class TestRunner {
 

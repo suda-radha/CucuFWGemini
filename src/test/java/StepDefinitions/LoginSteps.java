@@ -31,7 +31,7 @@ public class LoginSteps {
 
 	@Given("I navigate to the login page")
 	public void i_navigate_to_the_login_page() throws IOException {
-		String url = Utils.ConfigReader.getGlobalValue("url");
+		String url = Utils.ConfigReader.getGlobalValue("login_url");
 		driver.get(url);
 	}
 

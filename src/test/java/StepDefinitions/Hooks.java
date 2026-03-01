@@ -29,6 +29,9 @@ public class Hooks {
 			options.addArguments("--no-sandbox"); // Required for Linux CI environments
 			options.addArguments("--disable-dev-shm-usage"); // Overcomes limited resource problems
 			options.addArguments("--window-size=1920,1080"); // Set a consistent screen size
+			options.addArguments("--log-level=3"); // Silences all but critical errors
+			options.addArguments("--silent");      // Tells ChromeDriver to keep quiet
+			System.setProperty("webdriver.chrome.silentOutput", "true"); // Extra layer of silence
 		}
 
 		driver = new ChromeDriver(options);

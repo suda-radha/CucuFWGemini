@@ -63,6 +63,30 @@
 					</systemPropertyVariables>
 				</configuration>
 			</plugin>
+			<!-- Plugin for Cucumber reporting like uhg-->
+			<plugin>
+    <groupId>net.masterthought</groupId>
+    <artifactId>maven-cucumber-reporting</artifactId>
+    <version>5.7.0</version>
+    <executions>
+        <execution>
+            <id>execution</id>
+            <phase>verify</phase>
+            <goals>
+                <goal>generate</goal>
+            </goals>
+            <configuration>
+                <projectName>Cucumber-Automation-Report</projectName>
+                <outputDirectory>${project.build.directory}/cucumber-html-reports</outputDirectory>
+                <inputDirectory>${project.build.directory}/cucumber-reports</inputDirectory>
+                <jsonFiles>
+                    <param>**/*.json</param>
+                </jsonFiles>
+            </configuration>
+        </execution>
+    </executions>
+</plugin>
+			
 		</plugins>
 	</build>
 

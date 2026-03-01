@@ -9,6 +9,8 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 
 public class LoginPage {
 	WebDriver driver;
@@ -62,7 +64,30 @@ public class LoginPage {
 	}
 
 	public void acceptTerms() {
-		termsCheckbox.click();
+        // Robust click: wait until clickable, try normal click, fall back to JS click or clicking the label
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable(termsCheckbox));
+            termsCheckbox.click();
+            return;
+        } catch (Exception e) {
+            // Try JS click after scrolling into view
+            try {
+                ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", termsCheckbox);
+                ((JavascriptExecutor) driver).executeScript("arguments[0].click();", termsCheckbox);
+                return;
+            } catch (Exception e2) {
+                // Try clicking the label associated with the checkbox (if present)
+                try {
+                    WebElement label = driver.findElement(By.cssSelector("label[for='terms']"));
+                    label.click();
+                    return;
+                } catch (Exception e3) {
+                    // Re-throw the original exception so test framework receives context
+                    throw new RuntimeException("Unable to click the terms checkbox", e);
+                }
+            }
+        }
 	}
 
 	public void clickSignIn() {

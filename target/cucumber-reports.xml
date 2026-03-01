@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="Cucumber" time="19.07" tests="2" skipped="0" failures="0" errors="0">
-<testcase classname="Login Page Functionality" name="Data-driven login for different roles - Example #1.1" time="8.82">
+<testsuite name="Cucumber" time="18.086" tests="2" skipped="0" failures="0" errors="0">
+<testcase classname="Login Page Functionality" name="Data-driven login for different roles - Example #1.1" time="8.777">
 <system-out><![CDATA[
 Given I navigate to the login page..........................................passed
 When I enter username "rahulshettyacademy" and password "Learning@830$3mK2".passed
@@ -11,7 +11,7 @@ And I click the Sign In button..............................................pass
 Then I should be redirected to the product page.............................passed
 ]]></system-out>
 </testcase>
-<testcase classname="Login Page Functionality" name="Data-driven login for different roles - Example #1.2" time="10.123">
+<testcase classname="Login Page Functionality" name="Data-driven login for different roles - Example #1.2" time="9.189">
 <system-out><![CDATA[
 Given I navigate to the login page..........................................passed
 When I enter username "rahulshettyacademy" and password "Learning@830$3mK2".passed

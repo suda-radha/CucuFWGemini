@@ -13,7 +13,7 @@ import io.cucumber.junit.CucumberOptions;
 				  "html:target/cucumber-reports.html", 
 				  "junit:target/cucumber-reports.xml",
 				  //"json:target/cucumber-reports.json", // Added for advanced reporting
-				  "json:target/cucumber-reports/cucumber.json"}, // This is required!
+				  "json:target/cucumber-reports.json"}, // This is required!
 		monochrome = true,
 		tags = "@focus"
 		)

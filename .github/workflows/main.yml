@@ -30,18 +30,21 @@ jobs:
       - name: Check Browser Version
         run: google-chrome --version
 
-      #4. Run Tests using maven
-          # We use -Dbrowser=headless because Cloud runners don't have a UI/Display
-      - name: Run Selenium Tests
-        run: mvn clean test -Dbrowser=headless
+      #4. Run Cucumber Tests
+      - name: Run Cucumber Tests
+        run: mvn clean test -Dtest=Runner.TestRunner -Dbrowser=headless
 
       
       # 5. Upload Artifacts
-      - name: Upload Test Report
+      - name: Upload Cucumber Test Reports
         if: always() # Ensures report is uploaded even if tests fail
         uses: actions/upload-artifact@v4
         with:
-          name: selenium-test-report
-          path: target/surefire-reports/ 
+          name: cucumber-test-reports
+          path: 
+            target/cucumber-reports.html
+            target/cucumber-reports.json
+            target/cucumber-reports.xml
+            target/surefire-reports/
           retention-days: 5
       

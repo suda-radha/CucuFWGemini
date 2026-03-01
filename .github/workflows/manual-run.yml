@@ -2,10 +2,6 @@ name: Manual Run - Selenium Cucumber Suite
 
 # Run the pipeline on every push to teh main branch
 on:
-  # Runs automatically on every push to main
-  push:
-    branches: [ main ]
-  
   # Allows manual trigger from the Actions tab
   workflow_dispatch:
     inputs:

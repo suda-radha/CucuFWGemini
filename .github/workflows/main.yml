@@ -32,7 +32,8 @@ jobs:
 
       #4. Run Cucumber Tests
       - name: Run Cucumber Tests
-        run: mvn clean test -Dtest=Runner.TestRunner -Dbrowser=headless -PRegression
+        #run: mvn clean test -Dtest=Runner.TestRunner -Dbrowser=headless -PRegression
+        run: mvn clean verify -Dtest=Runner.TestRunner -Dbrowser=headless -PRegression
 
       
       # 5. Upload Artifacts
@@ -42,9 +43,10 @@ jobs:
         with:
           name: cucumber-test-reports
           path: |
-            target/cucumber-reports.html
-            target/cucumber-reports.json
-            target/cucumber-reports.xml
-            target/surefire-reports/
+            target/cucumber-reports/ # cucumber reports like uhg with plugin added in pom.xml
+            #target/cucumber-reports.html
+            #target/cucumber-reports.json
+            #target/cucumber-reports.xml
+            #target/surefire-reports/
           retention-days: 5
       

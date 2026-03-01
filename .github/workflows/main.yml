@@ -21,14 +21,14 @@ jobs:
         uses: actions/setup-java@v4
         with:
           java-version: '21'
-          distribution: 'termurin'
+          distribution: 'temurin'
           cache: maven
 
       #3. Setup Chrome
-      - name: Setup Browser
-        run: 
-          sudo apt-get update
-          sudo apt-get install -y google-chrome-stable
+      # GitHub Hosted Runners already have Chrome installed.
+      # This step just verifies the version to ensure it's ready.
+      - name: Check Browser Version
+        run: google-chrome --version
 
       #4. Run Tests using maven
           # We use -Dbrowser=headless because Cloud runners don't have a UI/Display

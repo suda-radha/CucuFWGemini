@@ -8,7 +8,7 @@ on:
       profile:
         description: 'Select Maven Profile to run'
         required: true
-        default: 'Smoke'
+        default: 'Focus'
         type: choice
         options:
           - Focus

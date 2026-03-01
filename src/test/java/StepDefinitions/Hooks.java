@@ -21,16 +21,24 @@ public class Hooks {
 
 	}
 
+//	@After
+//	public void teardown(Scenario scenario) {
+//
+//		if (scenario.isFailed()) {
+//			// Take Screenshot if test fails
+//			final byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+//			scenario.attach(screenshot, "image/png", "Failed_Screenshot");
+//
+//		}
+//		if (driver != null) {
+//			driver.quit();
+//		}
+//	}
+	
 	@After
-	public void teardown(Scenario scenario) {
+	public void teardown() {
 
-		if (scenario.isFailed()) {
-			// Take Screenshot if test fails
-			final byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
-			scenario.attach(screenshot, "image/png", "Failed_Screenshot");
-
-		}
-		if (driver != null) {
+			if (driver != null) {
 			driver.quit();
 		}
 	}

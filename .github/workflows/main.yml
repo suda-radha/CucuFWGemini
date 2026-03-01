@@ -43,7 +43,7 @@ jobs:
         with:
           name: cucumber-test-reports
           path: |
-            target/cucumber-reports/ # cucumber reports like uhg with plugin added in pom.xml
+            target/cucumber-html-reports/ # cucumber reports like uhg with plugin added in pom.xml
             #target/cucumber-reports.html
             #target/cucumber-reports.json
             #target/cucumber-reports.xml

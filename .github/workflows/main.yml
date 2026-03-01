@@ -42,11 +42,6 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: cucumber-test-reports
-          path: |
-            target/cucumber-html-reports/ # cucumber reports like uhg with plugin added in pom.xml
-            #target/cucumber-reports.html
-            #target/cucumber-reports.json
-            #target/cucumber-reports.xml
-            #target/surefire-reports/
+          path: target/cucumber-html-reports/ # cucumber reports like uhg with plugin added in pom.xml
           retention-days: 5
       

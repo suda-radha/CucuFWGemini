@@ -12,9 +12,8 @@ import io.cucumber.junit.CucumberOptions;
 		plugin = {"pretty", 
 				  "html:target/cucumber-reports.html", 
 				  "junit:target/cucumber-reports.xml",
-				  //"json:target/cucumber-reports.json", // Added for advanced reporting
-				  "json:target/cucumber-reports.json"}, // This is required!
-		monochrome = true,
+				  "json:target/cucumber-reports/cucumber.json"}, // This creates the missing folder
+				  monochrome = true,
 		tags = "@focus"
 		)
 public class TestRunner {

@@ -78,12 +78,13 @@
 						<configuration>
 							<projectName>Cucumber-Automation-Report</projectName>
 							<outputDirectory>
-								${project.build.directory}/visual-report</outputDirectory>
+								${project.build.directory}/cucumber-html-reports</outputDirectory>
 							<inputDirectory>
 								${project.build.directory}/cucumber-reports</inputDirectory>
 							<jsonFiles>
-								<param>**/cucumber.json</param>
+								<param>**/*.json</param>
 							</jsonFiles>
+							<checkBuildResult>false</checkBuildResult>
 						</configuration>
 					</execution>
 				</executions>

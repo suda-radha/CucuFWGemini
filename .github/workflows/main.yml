@@ -37,8 +37,18 @@ jobs:
         # Adding -Dmaven.test.failure.ignore=true ensures the report is always generated
         run: mvn clean verify -Dtest=Runner.TestRunner -Dbrowser=headless -PRegression -Dmaven.test.failure.ignore=true
 
-      
-      # 5. Upload Artifacts
+      # 5. Run Reruns (Only if failed.txt is not empty)
+      - name: Run Failed Tests Rerun
+        if: always()
+        # This only runs if failed.txt exists and has content
+        run: |
+          if [ -s target/failed.txt ]; then
+            mvn test -Dtest=FailedTestRunner -Dbrowser=headless
+          else
+            echo "No failed tests to rerun."
+          Fi
+
+      # 6. Upload Artifacts
       - name: Upload Cucumber Test Reports
         if: always() 
         uses: actions/upload-artifact@v4

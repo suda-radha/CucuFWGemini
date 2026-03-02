@@ -12,9 +12,10 @@ import io.cucumber.junit.CucumberOptions;
 		plugin = {"pretty", 
 				  "html:target/cucumber-reports.html", 
 				  "junit:target/cucumber-reports.xml",
-				  "json:target/cucumber-reports/cucumber.json"}, // This creates the missing folder
-				  monochrome = true,
-		tags = "@focus"
+				  "json:target/cucumber-reports/cucumber.json", // MUST match pom.xml input
+				  "rerun:target/failed.txt"},
+		monochrome = true
+		//tags = "@focus" // Note: tags here will be OVERRIDDEN by your Maven Profile tags (-PFocus)
 		)
 public class TestRunner {
 

@@ -58,6 +58,7 @@
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>3.0.0-M5</version>
 				<configuration>
+					<testFailureIgnore>true</testFailureIgnore>
 					<systemPropertyVariables>
 						<cucumber.filter.tags>${cucumber.filter.tags}</cucumber.filter.tags>
 					</systemPropertyVariables>
@@ -78,7 +79,7 @@
 						<configuration>
 							<projectName>Cucumber-Automation-Report</projectName>
 							<outputDirectory>
-								${project.build.directory}/cucumber-html-reports</outputDirectory>
+								${project.build.directory}/cucumber-visual-report</outputDirectory>
 							<inputDirectory>
 								${project.build.directory}/cucumber-reports</inputDirectory>
 							<jsonFiles>

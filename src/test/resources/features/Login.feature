@@ -13,3 +13,15 @@ Feature: Login Page Functionality
       | username           | password          | role  | occupation |
       | rahulshettyacademy | Learning@830$3mK2 | Admin | Teacher    |
       | rahulshettyacademy | Learning@830$3mK2 | User  | Consultant |
+
+  @focus
+  Scenario: Simple Rerun Test Case 1
+    Given I navigate to the login page
+    When I enter username "rahulshettyacademy" and password "Learning@830$3mK2"
+    Then I verify the login button is displayed
+
+  @focus
+  Scenario: Simple Rerun Test Case 2
+    Given I navigate to the login page
+    When I enter username "rahulshettyacademy" and password "Learning@830$3mK2"
+    Then I verify the login button is displayed

@@ -93,5 +93,16 @@ public class LoginPage {
 	public void clickSignIn() {
 		signInBtn.click();
 	}
+	
+	public boolean isLoginButtonDisplayed() {
+        try {
+            // Using a short explicit wait ensures the test is robust 
+            // even if the page takes a second to render.
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+            return wait.until(ExpectedConditions.visibilityOf(signInBtn)).isDisplayed();
+        } catch (Exception e) {
+            return false;
+        }
+	}
 
 }

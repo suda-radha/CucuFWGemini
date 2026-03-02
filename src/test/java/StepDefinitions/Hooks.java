@@ -40,30 +40,19 @@ public class Hooks {
 	}
 
 	@After
-	public void teardown(Scenario scenario) {
-
-		// I recommend keeping this enabled!
-		// In GitHub Actions, you can't "see" the failure, so screenshots are vital.
-		// 1. Existing logic: Embed screenshots in HTML report
-		if (scenario.isFailed() && driver != null) {
-			final byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
-			scenario.attach(screenshot, "image/png", "Failed_Screenshot_" + scenario.getName());
-		}
-		// 2. Optional: Save as a physical file on your hard drive
-		try {
-			File sourcePath = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-			File destinationPath = new File("target/screenshots/" + scenario.getName() + ".png");
-			FileUtils.copyFile(sourcePath, destinationPath);
-			System.out.println("Screenshot saved to: " + destinationPath.getAbsolutePath());
-		} catch (Exception e) {
-			System.out.println("Failed to save physical screenshot: " + e.getMessage());
-		}
-
-		if (driver != null) {
-			//driver.quit();
-		}
+	public void tearDown(Scenario scenario) {
+	    if (scenario.isFailed()) {
+	        // 1. Capture the screenshot as a byte array
+	        final byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+	        
+	        // 2. Embed it into the report with a name and type
+	        // This is what the Masterthought plugin uses to display the image
+	        scenario.attach(screenshot, "image/png", "Failed Step Screenshot: " + scenario.getName());
+	    }
+	    
+	    if (driver != null) {
+	        driver.quit();
+	    }
 	}
-
-	
 
 }

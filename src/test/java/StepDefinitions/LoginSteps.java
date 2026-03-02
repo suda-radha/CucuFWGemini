@@ -71,5 +71,11 @@ public class LoginSteps {
 		wait.until(ExpectedConditions.urlContains("shop"));
 		Assert.assertTrue(driver.getCurrentUrl().contains("shop"));
 	}
-
+	@Then("I verify the login button is displayed")
+	public void i_verify_the_login_button_is_displayed() {
+	    // To test RERUN: 
+	    // Set to 'assertTrue' to PASS
+	    // Set to 'assertFalse' to FAIL (this triggers the rerun)
+	    Assert.assertFalse("Rerun test failure trigger", loginPage.isLoginButtonDisplayed());
+	}
 }

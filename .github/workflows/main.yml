@@ -46,7 +46,7 @@ jobs:
             mvn test -Dtest=FailedTestRunner -Dbrowser=headless
           else
             echo "No failed tests to rerun."
-          Fi
+          fi
 
       # 6. Upload Artifacts
       - name: Upload Cucumber Test Reports

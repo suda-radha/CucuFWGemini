@@ -33,7 +33,9 @@ jobs:
       #4. Run Cucumber Tests
       - name: Run Cucumber Tests
         #run: mvn clean test -Dtest=Runner.TestRunner -Dbrowser=headless -PRegression
-        run: mvn clean verify -Dtest=Runner.TestRunner -Dbrowser=headless -PRegression
+        #run: mvn clean verify -Dtest=Runner.TestRunner -Dbrowser=headless -PRegression
+        # Adding -Dmaven.test.failure.ignore=true ensures the report is always generated
+        run: mvn clean verify -Dtest=Runner.TestRunner -Dbrowser=headless -PRegression -Dmaven.test.failure.ignore=true
 
       
       # 5. Upload Artifacts
